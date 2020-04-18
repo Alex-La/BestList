@@ -11,6 +11,11 @@ const pool = mariadb.createPool({
 });
 
 const app = express();
+app.use(express.static("public"));
+
+app.get("/", function (req, res) {
+  res.send("<h1>Hello World!</h1>");
+});
 
 app.get("/get", async (req, res) => {
   let conn;
@@ -41,4 +46,6 @@ app.post("/set", bodyParser.json(), async (req, res) => {
 });
 
 const server = http.createServer(app);
-server.listen(8080, () => console.log("Server listen on port 8080"));
+server.listen(process.env.PORT || 8080, () =>
+  console.log("Server listen on port 8080")
+);
