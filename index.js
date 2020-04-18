@@ -10,6 +10,7 @@ const pool = new Pool({
   database: "d3gs3l95rt24gp",
   password: "5a8639cca56df406822f98a96bd03003f44b8f4ec0a5fc135265eb983b76c758",
   port: "5432",
+  ssl: true,
 });
 
 pool.on("error", (err, client) => {
