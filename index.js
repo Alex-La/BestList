@@ -3,6 +3,8 @@ const http = require("http");
 const pg = require("pg");
 const bodyParser = require("body-parser");
 
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+
 const Pool = pg.Pool;
 const pool = new Pool({
   user: "woiydotgaapcda",
@@ -29,7 +31,7 @@ app.get("/get", async (req, res) => {
   try {
     pool.connect().then((client) => {
       return client
-        .query("SELECT * FROM users ORDER BY best_time AS")
+        .query("SELECT * FROM users ORDER BY best_time ASC")
         .then((result) => {
           client.release();
           res.json(result.rows);
